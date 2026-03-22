@@ -10,6 +10,7 @@ import { ThemeProvider, CssBaseline } from '@mui/material'
 import InitColorSchemeScript from '@mui/material/InitColorSchemeScript';
 import theme from './theme'
 import GlobalLoadingPage from './components/GlobalLoadingPage'
+import CampaignEdit from './pages/campaign/CampaignEdit';
 
 const PrivacyPolicy = lazy(() => import('./pages/policy/Privacy'))
 const TermsOfService = lazy(() => import('./pages/policy/Terms'))
@@ -29,6 +30,7 @@ function App() {
       <BrowserRouter>
         <Suspense fallback={<GlobalLoadingPage />}>
           <Routes>
+            <Route path="/campaign/edit" element = {<CampaignEdit/>}/>
             <Route path="/user/login" element={<LoginPage />} />
             <Route path="/user/callback" element={<CallbackPage />} />
             <Route path="/user/callback/write" element={<CallbackWritePage />} />
