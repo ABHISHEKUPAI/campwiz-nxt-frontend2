@@ -1,10 +1,10 @@
 import { initialCampaignCreate, type CampaignCreate } from "@/types/campaign/create";
 import { Autocomplete, FormControlLabel, TextField, Typography, Checkbox } from "@mui/material";
-import { DatePicker,LocalizationProvider } from "@mui/x-date-pickers";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import utc from "dayjs/plugin/utc";
 import dayjs from "dayjs";
-import type{ ActionDispatch } from "react";
+import type { ActionDispatch } from "react";
 import UserInput from "../user/UserInput";
 import { useTranslation } from "react-i18next";
 
@@ -22,8 +22,7 @@ const CampaignEditForm = ({
   disabled?: boolean;
   disableOnPrivate?: boolean;
 }) => {
-
-  const { t } = useTranslation(); 
+  const { t } = useTranslation();
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -37,7 +36,15 @@ const CampaignEditForm = ({
         disabled={loading || disabled}
       />
 
-      <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: 10, flexFlow: "wrap" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          marginBottom: 10,
+          flexFlow: "wrap",
+        }}
+      >
         
         <Autocomplete
           options={["commons"]}
@@ -52,8 +59,10 @@ const CampaignEditForm = ({
 
         <DatePicker
           timezone="UTC"
-          onChange={(date) => dispatch({ startDate: date?.toISOString() })}
-          value={dayjs(campaign.startDate)}
+          onChange={(date) =>
+            dispatch({ startDate: date?.toISOString() ?? null })
+          }
+          value={campaign.startDate ? dayjs(campaign.startDate) : null}
           sx={{ width: { xs: "100%", sm: "27%" }, mb: 1 }}
           label={t("campaign.startDate")}
           disabled={loading || disabled}
@@ -61,13 +70,14 @@ const CampaignEditForm = ({
 
         <DatePicker
           timezone="UTC"
-          onChange={(date) => dispatch({ endDate: date?.toISOString() })}
-          value={dayjs(campaign.endDate)}
+          onChange={(date) =>
+            dispatch({ endDate: date?.toISOString() ?? null })
+          }
+          value={campaign.endDate ? dayjs(campaign.endDate) : null}
           sx={{ width: { xs: "100%", sm: "27%" }, mb: 1 }}
           label={t("campaign.endDate")}
           disabled={loading || disabled}
         />
-
       </div>
 
       <UserInput
@@ -78,8 +88,14 @@ const CampaignEditForm = ({
         sx={{ mb: 2 }}
       />
 
-      <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", flexFlow: "wrap" }}>
-        
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          flexFlow: "wrap",
+        }}
+      >
         <TextField
           label={t("campaign.description")}
           variant="outlined"
@@ -101,13 +117,12 @@ const CampaignEditForm = ({
           minRows={4}
           disabled={loading || disabled}
         />
-
       </div>
 
       <FormControlLabel
         control={
           <Checkbox
-            checked={campaign.isPublic} 
+            checked={campaign.isPublic}
             onChange={(e) => dispatch({ isPublic: e.target.checked })}
             disabled={loading || disabled}
           />
@@ -120,7 +135,6 @@ const CampaignEditForm = ({
           </Typography>
         }
       />
-
     </LocalizationProvider>
   );
 };

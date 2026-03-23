@@ -5,12 +5,12 @@ import { CampaignType } from "../campaign/CampaignType"
 export interface CampaignCreate { 
     coordinators: WikimediaUsername[]
     description: string
-    endDate: string
+    endDate: string |null
     image: string
     language: string
     name: string
     rules: string
-    startDate: string
+    startDate: string |null
     isPublic: boolean
     status: RoundStatus
     projectId: string
