@@ -1,4 +1,4 @@
-import { initialCampaignCreate, type CampaignCreate } from "@/types/campaign/create";
+import {type CampaignCreate } from "@/types/campaign/create";
 import { Autocomplete, FormControlLabel, TextField, Typography, Checkbox } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -53,7 +53,7 @@ const CampaignEditForm = ({
           )}
           sx={{ width: { xs: "100%", sm: "40%" }, mb: 1 }}
           value={campaign.language}
-          onChange={(e, value) => dispatch({ language: value as string })}
+          onChange={(e, value) =>dispatch({ language: value ?? "" })}
           disabled={loading || disabled}
         />
 
@@ -127,7 +127,7 @@ const CampaignEditForm = ({
             disabled={loading || disabled}
           />
         }
-        disabled={disableOnPrivate && !initialCampaignCreate.isPublic}
+        disabled={disableOnPrivate && !campaign.isPublic}
         sx={{ my: 2 }}
         label={
           <Typography variant="body1" color="textSecondary">
