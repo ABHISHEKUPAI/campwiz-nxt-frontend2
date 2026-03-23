@@ -30,7 +30,7 @@ function App() {
       <BrowserRouter>
         <Suspense fallback={<GlobalLoadingPage />}>
           <Routes>
-            <Route path="/campaign/edit" element = {<CampaignEdit/>}/>
+            <Route path="/campaign/:campaignId/edit" element={<CampaignEdit />} />
             <Route path="/user/login" element={<LoginPage />} />
             <Route path="/user/callback" element={<CallbackPage />} />
             <Route path="/user/callback/write" element={<CallbackWritePage />} />
